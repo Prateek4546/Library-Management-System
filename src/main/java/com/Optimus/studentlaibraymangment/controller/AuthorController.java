@@ -28,4 +28,14 @@ public class AuthorController {
         List<AuthorResponse> responseList = authorService.getAllAuthor();
         return new ResponseEntity(responseList , HttpStatus.OK);
     }
+    @GetMapping("/id/{id}")
+    public  ResponseEntity getById(@PathVariable("id") int id){
+      try{
+          AuthorResponse response = authorService.getById(id);
+          return new ResponseEntity(response , HttpStatus.OK);
+      }
+      catch (Exception e){
+          return new ResponseEntity<>(e.getMessage() , HttpStatus.BAD_REQUEST);
+      }
+    }
 }
