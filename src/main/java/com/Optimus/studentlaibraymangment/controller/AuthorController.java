@@ -38,4 +38,15 @@ public class AuthorController {
           return new ResponseEntity<>(e.getMessage() , HttpStatus.BAD_REQUEST);
       }
     }
+
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity deletById(@PathVariable("id") int id){
+        try{
+            authorService.deleteById(id);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e.getMessage() , HttpStatus.BAD_REQUEST);
+        }
+    }
 }

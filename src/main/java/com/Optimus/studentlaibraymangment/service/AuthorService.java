@@ -37,4 +37,13 @@ public class AuthorService {
         }
         return response;
     }
+    public void deleteById(int id){
+        Optional<Author> optionalAuthor = authorRepo.findById(id);
+        if(optionalAuthor.isEmpty()){
+            throw new AuthorNotFoundException("Invalid Author Id !!");
+        }
+        else{
+            authorRepo.deleteById(id);
+        }
+    }
 }
