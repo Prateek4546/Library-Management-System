@@ -5,6 +5,9 @@ import com.Optimus.studentlaibraymangment.DTO.responseDTO.LibraryCardResponse;
 import com.Optimus.studentlaibraymangment.DTO.responseDTO.StudentResponse;
 import com.Optimus.studentlaibraymangment.entity.Student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentTansfomer {
 
 
@@ -28,5 +31,22 @@ public class StudentTansfomer {
                 .email(student.getEmail())
                 .libraryCardResponse(libraryCardResponse)
                 .build();
+    }
+    public static List<StudentResponse> entityListToResponse(List<Student> studentList){
+        List<StudentResponse> responses = new ArrayList<>();
+        for(Student s : studentList){
+            LibraryCardResponse libraryCardResponse = LibraryCardResponse.builder()
+                    .cardNo(s.getLibraryCard().getCardNo())
+                    .cardStatus(s.getLibraryCard().getCardStatus())
+                    .issueDate(s.getLibraryCard().getIssueDate())
+                    .build();
+            StudentResponse studentResponse = StudentResponse.builder()
+                    .name(s.getName())
+                    .email(s.getEmail())
+                    .libraryCardResponse(libraryCardResponse)
+                    .build();
+            responses.add(studentResponse);
+        }
+        return responses;
     }
 }

@@ -32,6 +32,7 @@ public class studentController {
         List<String> males = studentService.getAllMales();
         return males;
     }
+
     @GetMapping("/get")
     public ResponseEntity getStudent(@RequestParam("id") int regNo){
         Student student = studentService.getStudent(regNo);
@@ -42,6 +43,11 @@ public class studentController {
             return  ResponseEntity.notFound().build();
         }
 
+    }
+    @GetMapping
+    public  ResponseEntity getAllStudent(){
+        List<StudentResponse> response = studentService.getAllStudent();
+        return new ResponseEntity(response , HttpStatus.OK);
     }
 
 

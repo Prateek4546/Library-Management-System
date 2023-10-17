@@ -22,9 +22,7 @@ import java.util.UUID;
 public class StudentService {
     @Autowired
            private StudentRepo  studentRepo;
-           public StudentService(StudentRepo studentRepo){
-               this.studentRepo = studentRepo;
-           }
+
            public StudentResponse addStudent(StudentRequest studentRequest){
                // converting student dto to Model
                Student student = StudentTansfomer.StudentRequestToStudent(studentRequest);
@@ -51,5 +49,9 @@ public class StudentService {
         names.add(s.getName());
     }
     return names;
+    }
+    public List<StudentResponse> getAllStudent(){
+               List<StudentResponse> studentResponses = StudentTansfomer.entityListToResponse(studentRepo.findAll());
+               return studentResponses;
     }
 }
