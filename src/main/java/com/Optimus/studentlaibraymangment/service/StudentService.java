@@ -8,6 +8,7 @@ import com.Optimus.studentlaibraymangment.Enum.Gender;
 import com.Optimus.studentlaibraymangment.entity.LibraryCard;
 import com.Optimus.studentlaibraymangment.entity.Student;
 import com.Optimus.studentlaibraymangment.Enum.CardStatus;
+import com.Optimus.studentlaibraymangment.exception.StudentNotFoundException;
 import com.Optimus.studentlaibraymangment.repository.StudentRepo;
 import com.Optimus.studentlaibraymangment.tansformer.LibraryCardTranformer;
 import com.Optimus.studentlaibraymangment.tansformer.StudentTansfomer;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -53,5 +55,14 @@ public class StudentService {
     public List<StudentResponse> getAllStudent(){
                List<StudentResponse> studentResponses = StudentTansfomer.entityListToResponse(studentRepo.findAll());
                return studentResponses;
+    }
+    public void deleteById(int id){
+        Optional<Student> optionalStudent = studentRepo.findById(id);
+        if(optionalStudent.isEmpty()){
+            throw new StudentNotFoundException("Invalid Student Id");
+        }
+        else{
+            studentRepo.deleteById(id);
+        }
     }
 }

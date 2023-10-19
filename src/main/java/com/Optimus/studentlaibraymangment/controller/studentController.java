@@ -50,5 +50,15 @@ public class studentController {
         return new ResponseEntity(response , HttpStatus.OK);
     }
 
+    @DeleteMapping("id/{id}")
+    public ResponseEntity deleteById(@PathVariable("id") int id){
+        try{
+            studentService.deleteById(id);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+        catch(Exception e){
+            return new ResponseEntity(e.getMessage() , HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
