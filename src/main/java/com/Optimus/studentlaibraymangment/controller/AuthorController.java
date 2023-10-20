@@ -25,8 +25,13 @@ public class AuthorController {
     }
     @GetMapping
     public ResponseEntity getALlAuthor(){
-        List<AuthorResponse> responseList = authorService.getAllAuthor();
-        return new ResponseEntity(responseList , HttpStatus.OK);
+       try{
+           List<AuthorResponse> responseList = authorService.getAllAuthor();
+           return new ResponseEntity(responseList , HttpStatus.OK);
+       }
+       catch(Exception e){
+           return new ResponseEntity(e.getMessage() , HttpStatus.BAD_REQUEST);
+       }
     }
     @GetMapping("/id/{id}")
     public  ResponseEntity getById(@PathVariable("id") int id){
